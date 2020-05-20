@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -37,6 +37,10 @@ const styles = (theme) => ({
 
 function AppAppBar(props) {
   const { classes } = props;
+  const [isAuthed, setIsAuthed] = useState('');
+  useEffect(() => {
+    setIsAuthed(!!localStorage.getItem('jwtToken'));
+  });
 
   return (
     <div>
@@ -52,25 +56,29 @@ function AppAppBar(props) {
           >
             {'CVeator'}
           </Link>
-          <div className={classes.right}>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              className={classes.rightLink}
-              href="/sign-in"
-            >
-              {'Sign In'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/sign-up"
-            >
-              {'Sign Up'}
-            </Link>
-          </div>
+          {isAuthed ? (
+            ''
+          ) : (
+            <div className={classes.right}>
+              <Link
+                color="inherit"
+                variant="h6"
+                underline="none"
+                className={classes.rightLink}
+                href="/signin"
+              >
+                {'Sign In'}
+              </Link>
+              <Link
+                variant="h6"
+                underline="none"
+                className={clsx(classes.rightLink, classes.linkSecondary)}
+                href="/signup"
+              >
+                {'Sign Up'}
+              </Link>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <div className={classes.placeholder} />
