@@ -35,7 +35,7 @@ function EduForm(props) {
   const [infoState, setInfoState] = useState({
     startDate: new Date(),
     endDate: new Date(),
-  });
+  }, []);
   const [edusSeq, setEdusSeq] = useState(0);
   const [sent, setSent] = useState(false);
 
@@ -131,24 +131,20 @@ function EduForm(props) {
                 margin="normal"
                 name="eduStartDate"
                 label="Start Date"
+                value={infoState['eduStartDate']}
                 disabled={submitting || sent}
                 onChange={(date) => handleDateChange('eduStartDate' , date)}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
               />
               <KeyboardDatePicker
                 fullWidth
                 disabled={submitting || sent}
                 required
                 format="MM/dd/yyyy"
+                value={infoState['eduEndDate']}
                 name="eduEndDate"
                 label="End Date"
                 margin="normal"
                 onChange={(date) => handleDateChange('eduEndDate' , date)}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
               />
               <br />
               <br />

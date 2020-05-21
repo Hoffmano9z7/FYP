@@ -48,7 +48,7 @@ function ProductHero(props) {
         size="large"
         className={classes.button}
         component="a"
-        href="/personalForm"
+        href="/selectTemplate"
       >
         Try Now
       </Button>

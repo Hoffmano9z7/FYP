@@ -70,7 +70,7 @@ function SignIn(props) {
       localStorage.setItem("authToken", token);
       console.log(infoState);
       e.preventDefault();
-      props.history.push('/')
+      props.history.push('/manageCV');
     } else {
       alert('Invalid email or password!');
       setSent(false);

@@ -46,6 +46,7 @@ function AppAppBar(props) {
   const [isAuthed, setIsAuthed] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    props.history.push('/');
     window.location.reload();
   }
   

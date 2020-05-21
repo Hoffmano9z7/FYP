@@ -38,6 +38,7 @@ function SignUp(props) {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
   const [infoState, setInfoState] = React.useState({
+    isReceiveEmail: true,
     isAgreeTerm: true,
     isViewPrivacy: true,
   });
@@ -93,7 +94,7 @@ function SignUp(props) {
         localStorage.setItem("authToken", token);
       }
     }
-    //TODO: hoffman - generate pdf
+    saveNewCsData();
     props.history.push('/manageCV');
     return false;
   };
@@ -112,6 +113,7 @@ function SignUp(props) {
     const list = JSON.parse(localStorage.getItem("cvs")) || [];
     list.push(cv);
     localStorage.setItem('cvs', JSON.stringify(list));
+    
   }
 
   return (

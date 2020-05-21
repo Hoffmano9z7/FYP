@@ -102,7 +102,7 @@ function SignIn(props) {
   useEffect(() => {
     const list = JSON.parse(localStorage.getItem("cvs")) || [];
     setCvs(list);
-  });
+  }, []);
 
   return (
     <React.Fragment>

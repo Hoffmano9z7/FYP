@@ -71,7 +71,7 @@ function SignUp(props) {
       localStorage.setItem("accounts", JSON.stringify(accounts));
       const token = jwt.sign(infoState, 'cveator');
       localStorage.setItem("authToken", token);
-      props.history.goBack();
+      props.history.push('/')
     }
   };
 

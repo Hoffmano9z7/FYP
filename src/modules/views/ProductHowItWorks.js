@@ -111,7 +111,7 @@ function ProductHowItWorks(props) {
           variant="contained"
           className={classes.button}
           component="a"
-          href="/personalForm"
+          href="/selectTemplate"
         >
           Get started
         </Button>

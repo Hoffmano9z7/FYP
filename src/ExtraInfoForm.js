@@ -38,17 +38,14 @@ const useStyles = makeStyles((theme) => ({
 
 function EduForm(props) {
   const classes = useStyles();
+  const [subject, setSubject] = useState('');
   const [infoState, setInfoState] = useState([
-    {
-      key: '',
-      value: '',
-    }
+      {
+        key: '',
+        value: '',
+      }
   ]);
   const [sent, setSent] = useState(false);
-
-  // useEffect(() => {
-
-  // });
 
   const validate = (values) => {
       const errors = required(['email', 'password'], values);
@@ -63,6 +60,9 @@ function EduForm(props) {
   };
 
   const handleTextChange = e => {
+    setSubject(e.target.value);
+  }
+  const handleRowTextChange = e => {
     const i = e.target.name.replace('info', '').replace('input', '');
     let newInfoState = infoState.map( (info, index) => {
       if (index === parseInt(i)) {
@@ -124,6 +124,20 @@ function EduForm(props) {
           {({ submitting }) => (
             <form onSubmit={handleSubmit} className={classes.form}>
               <Grid container alignItems="center" >
+                <Grid item xs={10} md={11}>
+                  <TextField
+                    fullWidth
+                    disabled={submitting || sent}
+                    label={'Information Subject'}
+                    name={'subject'}
+                    margin="normal"
+                    value={subject}
+                    onChange={handleTextChange}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
                 { infoState.map( (info, index) => (
                   <Grid container item xs={12} alignItems="center" spacing={1} key={`extraInfoRow${index}`}>
                     <Grid item xs={2} md={1}>
@@ -131,7 +145,7 @@ function EduForm(props) {
                         <DeleteIcon />
                       </IconButton>
                     </Grid>
-                    <Grid item xs={10} md={5}>
+                    <Grid item xs={10} md={11}>
                       <TextField
                         fullWidth
                         disabled={submitting || sent}
@@ -139,25 +153,25 @@ function EduForm(props) {
                         name={'info' + index}
                         margin="normal"
                         value={info.key}
-                        onChange={handleTextChange}
+                        onChange={handleRowTextChange}
                         InputLabelProps={{
                           shrink: true,
                         }}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={12}>
                       <TextField
                         fullWidth
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
                         disabled={submitting || sent}
                         name={'input' + index}
                         label={'Input: ' + (index + 1)}
                         margin="normal"
                         value={info.value}
-                        onChange={handleTextChange}
+                        rowsMax={6}
+                        onChange={handleRowTextChange}
                       />
+                      <br />
+                      <br />
                     </Grid>
                   </Grid>
                 ))}

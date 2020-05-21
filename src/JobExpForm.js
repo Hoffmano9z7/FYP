@@ -132,6 +132,7 @@ function JobExpForm(props) {
                 name="jobStartDate"
                 label="Start Date"
                 disabled={submitting || sent}
+                value={infoState['jobStartDate']}
                 onChange={(date) => handleDateChange('jobStartDate' , date)}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
@@ -145,6 +146,7 @@ function JobExpForm(props) {
                 name="jobEndDate"
                 label="End Date"
                 margin="normal"
+                value={infoState['jobEndDate']}
                 onChange={(date) => handleDateChange('jobEndDate' , date)}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
