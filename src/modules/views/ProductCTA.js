@@ -76,7 +76,7 @@ function ProductCTA(props) {
       <Grid container>
         <Grid item xs={12} md={6} className={classes.cardWrapper}>
           <div className={classes.card}>
-            <form onSubmit={handleSubmit} className={classes.cardContent} method="post" action="firebase/jobs">
+            <form onSubmit={handleSubmit} className={classes.cardContent} method="post" action="firebase/jobForms">
               <Typography variant="h2" component="h2" gutterBottom>
                 Receive offers
               </Typography>

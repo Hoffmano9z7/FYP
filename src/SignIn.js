@@ -1,7 +1,7 @@
 import withRoot from './modules/withRoot';
 // --- Post bootstrap -----
 import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
+import { Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Typography from './modules/components/Typography';
@@ -9,9 +9,14 @@ import AppFooter from './modules/views/AppFooter';
 import AppAppBar from './modules/views/AppAppBar';
 import AppForm from './modules/views/AppForm';
 import { email, required } from './modules/form/validation';
-import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
+import { TextField } from '@material-ui/core';
+import {
+  withRouter
+} from 'react-router-dom';
+
+var jwt = require('jsonwebtoken');
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -26,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn() {
+function SignIn(props) {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
+  const [infoState, setInfoState] = React.useState({});
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
@@ -43,8 +49,33 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
+  const handleTextChange = e => {
+    setInfoState({
+      ...infoState,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
     setSent(true);
+    let accounts = JSON.parse(localStorage.getItem('accounts'));
+    if (!Array.isArray(accounts)) {
+      accounts = [];
+    }
+    const checks = accounts.filter( acc => acc.email == infoState.email);
+    
+    if (checks.length > 0) {
+      const token = jwt.sign(infoState, 'cveator');
+      localStorage.setItem("authToken", token);
+      console.log(infoState);
+      e.preventDefault();
+      props.history.push('/')
+    } else {
+      alert('Invalid email or password!');
+      setSent(false);
+    }
+    return false;
   };
 
   return (
@@ -63,31 +94,33 @@ function SignIn() {
           </Typography>
         </React.Fragment>
         <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
-              <Field
+          {({ submitting }) => (
+            <form onSubmit={handleSubmit} className={classes.form} noValidate>
+              <TextField
                 autoComplete="email"
-                autoFocus
-                component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
                 label="Email"
                 margin="normal"
                 name="email"
                 required
-                size="large"
+                onChange={handleTextChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
-              <Field
+              <TextField
                 fullWidth
-                size="large"
-                component={RFTextField}
-                disabled={submitting || sent}
                 required
-                name="password"
-                autoComplete="current-password"
-                label="Password"
-                type="password"
+                disabled={submitting || sent}
+                label={'Password'}
+                name='password'
                 margin="normal"
+                onChange={handleTextChange}
+                type="password"
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
@@ -121,4 +154,4 @@ function SignIn() {
   );
 }
 
-export default withRoot(SignIn);
+export default withRouter(withRoot(SignIn));

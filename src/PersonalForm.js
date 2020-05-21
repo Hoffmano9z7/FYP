@@ -57,7 +57,7 @@ function PersonalForm(props) {
     setSent(true);
     console.log(infoState)
     localStorage.setItem("personalInfo", JSON.stringify(infoState));
-    props.history.push('/edu');
+    props.history.push('/eduForm');
     return false;
   };
 

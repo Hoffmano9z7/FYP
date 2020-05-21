@@ -1,3 +1,4 @@
+const content = `
 ## 1. Services
 
 - 1.1 These CVeator Terms of Service (these “Terms”) apply to the features and functions provided by Functional Software, Inc. (“CVeator,” “our,” or “we”) via CVeator.com (the “Site”) (collectively, the “Services”). By accessing or using the Site or the Services, you agree to be bound by these Terms. If you do not agree to these Terms, you are not allowed to use the Site or the Services. The “Effective Date” of these Terms is the date you first use the Site, or access any of the Services.
@@ -145,3 +146,8 @@ You acknowledge and agree that any CVeator names, trademarks, service marks, log
 - 16.10 Except for payments due under these Terms, neither party will be responsible for any delay or failure to perform that is attributable in whole or in part to any cause beyond its reasonable control, including, without limitation, acts of God (fire, storm, floods, earthquakes, etc.); civil disturbances; disruption of telecommunications, power or other essential services; interruption or termination of service by any service providers used by CVeator to host the Services or to link its servers to the Internet; labor disturbances; vandalism; cable cut; computer viruses or other similar occurrences; or any malicious or unlawful acts of any third party.
 
 - 16.11 We are each independent contractors with respect to the subject matter of these Terms. Nothing contained in these Terms will be deemed or construed in any manner whatsoever to create a partnership, joint venture, employment, agency, fiduciary, or other similar relationship between us, and neither of us can bind the other contractually.
+
+
+`
+
+export default content;

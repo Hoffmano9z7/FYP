@@ -20,11 +20,11 @@ const styles = (theme) => ({
 });
 
 function AppForm(props) {
-  const { children, classes } = props;
+  const { children, classes, size } = props;
 
   return (
     <div className={classes.root}>
-      <Container maxWidth="sm">
+      <Container maxWidth={size || "sm"}>
         <Box mt={7} mb={12}>
           <Paper className={classes.paper}>{children}</Paper>
         </Box>
@@ -36,6 +36,7 @@ function AppForm(props) {
 AppForm.propTypes = {
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired,
+  size: PropTypes.string,
 };
 
 export default withStyles(styles)(AppForm);

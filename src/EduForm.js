@@ -36,12 +36,12 @@ function EduForm(props) {
     startDate: new Date(),
     endDate: new Date(),
   });
-  const [jobsSeq, setJobsSeq] = useState(0);
+  const [edusSeq, setEdusSeq] = useState(0);
   const [sent, setSent] = useState(false);
 
   useEffect(() => {
     const edus = JSON.parse(localStorage.getItem("eduInfo")) || [];
-    setJobsSeq(edus.length + 1);
+    setEdusSeq(edus.length + 1);
   });
 
   const validate = (values) => {
@@ -84,7 +84,7 @@ function EduForm(props) {
     console.log(edus);
     localStorage.setItem("eduInfo", JSON.stringify(edus));
     if (infoState.isLastJob) {
-      props.history.push('/extraInfo');
+      props.history.push('/extraInfoForm');
     } else {
       window.location.reload(false); 
     }
@@ -101,7 +101,7 @@ function EduForm(props) {
           Education
         </Typography>
         <Typography variant="body2" align="center">
-          {`Your ${jobsSeq} ${jobsSeq === 1 ? 'st' : (jobsSeq === 2 ? 'nd' : (jobsSeq === 3 ? 'rd' : 'th'))} latest education`}
+          {`Your ${edusSeq} ${edusSeq === 1 ? 'st' : (edusSeq === 2 ? 'nd' : (edusSeq === 3 ? 'rd' : 'th'))} latest education`}
         </Typography>
         <Form onSubmit={handleSubmit} validate={validate}>
           {({ submitting }) => (

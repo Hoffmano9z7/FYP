@@ -7,6 +7,11 @@ import PersonalForm from './PersonalForm';
 import SelectTemplate from './SelectTemplate';
 import EduForm from './EduForm';
 import JobExpForm from './JobExpForm';
+import ExtraInfoForm from './ExtraInfoForm';
+import ConfirmForm from './ConfirmForm';
+import Terms from './Terms';
+import Privacy from './Privacy';
+import ManageCV from './ManageCV';
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,11 +40,26 @@ function App() {
           <Route path="/personalForm">
             <PersonalForm />
           </Route>
-          <Route path="/edu">
+          <Route path="/eduForm">
             <EduForm />
           </Route>
-          <Route path="/job">
+          <Route path="/jobForm">
             <JobExpForm />
+          </Route>
+          <Route path="/extraInfoForm">
+            <ExtraInfoForm />
+          </Route>
+          <Route path="/confirm">
+            <ConfirmForm />
+          </Route>
+          <Route path="/privacy">
+            <Privacy />
+          </Route>
+          <Route path="/terms">
+            <Terms />
+          </Route>
+          <Route path="/manageCV">
+            <ManageCV />
           </Route>
           <Route path="/">
             <Home />

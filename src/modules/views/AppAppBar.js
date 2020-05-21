@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { Link, Button } from '@material-ui/core';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import {
+  withRouter
+} from 'react-router-dom';
+
+var jwt = require('jsonwebtoken');
 
 const styles = (theme) => ({
   title: {
@@ -35,11 +40,23 @@ const styles = (theme) => ({
   },
 });
 
+
 function AppAppBar(props) {
   const { classes } = props;
-  const [isAuthed, setIsAuthed] = useState('');
+  const [isAuthed, setIsAuthed] = useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    window.location.reload();
+  }
+  
   useEffect(() => {
-    setIsAuthed(!!localStorage.getItem('jwtToken'));
+    const token = localStorage.getItem('authToken')
+    try {
+      const decoded = jwt.verify(token, 'cveator');
+      setIsAuthed(true);
+    } catch(err) {
+      console.log('login fail...')
+    }
   });
 
   return (
@@ -56,10 +73,18 @@ function AppAppBar(props) {
           >
             {'CVeator'}
           </Link>
+          <div className={classes.right}>
           {isAuthed ? (
-            ''
+            <Button
+              variant="text"
+              underline="none"
+              className={clsx(classes.rightLink, classes.linkSecondary)}
+              onClick={handleLogout}
+            >
+              Log Out
+            </Button>
           ) : (
-            <div className={classes.right}>
+            <React.Fragment>
               <Link
                 color="inherit"
                 variant="h6"
@@ -77,8 +102,9 @@ function AppAppBar(props) {
               >
                 {'Sign Up'}
               </Link>
-            </div>
+            </React.Fragment>
           )}
+          </div>
         </Toolbar>
       </AppBar>
       <div className={classes.placeholder} />
@@ -90,4 +116,4 @@ AppAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AppAppBar);
+export default withStyles(styles)(withRouter(AppAppBar));

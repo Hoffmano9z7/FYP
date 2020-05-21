@@ -84,7 +84,7 @@ function JobExpForm(props) {
     console.log(jobs);
     localStorage.setItem("jobInfo", JSON.stringify(jobs));
     if (infoState.isLastJob) {
-      props.history.push('/edu');
+      props.history.push('/eduForm');
     } else {
       window.location.reload(false); 
     }
